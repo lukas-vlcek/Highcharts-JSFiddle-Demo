@@ -1,13 +1,12 @@
 /*
 ---
-name: Request.HTML - jsFiddle/Github integration demo
-description: jsFiddle demo hosted on Github using HTML Request to get Ajax data
+name: Highcharts 2.2.x resetZoomButton demo 
+description: Trying to learn how to show/hide resetZoomButton programatically while still keep the automatic zoom/reset function.
 authors:
-  - Piotr Zalewa
+  - Lukas Vlcek
 resources:
-  - /js/empty.js
-  - /css/normalize.css
+  - http://code.highcharts.com/master/highcharts.src.js
 ...
 */
 
-<p>This demo will show you how to: add multiple Events to an Element, create custom Events and fire an Event.</p> 
+<p>This demo tries to elaborate how to show/hide resetZoomButton programatically while still keep to automatic zoom/reset function.</p>
