@@ -5,7 +5,7 @@ description: Trying to learn how to show/hide resetZoomButton programatically wh
 authors:
   - Lukas Vlcek
 resources:
-  - http://code.highcharts.com/master/highcharts.src.js
+  - http://code.highcharts.com/164b8d95e7/highcharts.src.js
 ...
 */
 
