@@ -4,6 +4,9 @@ body {
 p {
 	padding: 7px 10px;
 }
+div {
+    padding: 5px;
+}
 #demo { 
 	border: 1px solid #999;
 }
