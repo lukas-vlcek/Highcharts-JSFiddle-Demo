@@ -1,15 +1,55 @@
-var chart = new Highcharts.Chart({
-    chart: {
-        renderTo: 'container',
-        defaultSeriesType: 'line',
-        zoomType: 'x'
-    },
+$(function(){
 
-    xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-    },
+    var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'container',
+            defaultSeriesType: 'line',
+            zoomType: 'x',
+            events: {
+                selection: function(event) {
+                    if (event.xAxis) {
+                        // user selected interval on chart
+                        var fromMillis = Math.floor(event.xAxis[0].min);
+                        var toMillis = Math.ceil(event.xAxis[0].max);
 
-    series: [{
-        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-    }]
-});​
+                        console.log("min = " + fromMillis);
+                        console.log("max = " + toMillis);
+
+                    } else {
+                        // chart zoom reset
+                    }
+                }
+            }
+        },
+
+        xAxis: {
+            type: 'datetime',
+            maxZoom: 259200000 // three days (3 * 24 * 3600 * 1000)
+        },
+
+        series: [{
+            data: []
+        }]
+    });
+
+    // create testing data
+    var data = [
+        { timestamp: 1331111111111, value: 2},
+        { timestamp: 1332111111111, value: 1},
+        { timestamp: 1333111111111, value: 3},
+        { timestamp: 1334111111111, value: 2},
+        { timestamp: 1335111111111, value: 1},
+        { timestamp: 1336111111111, value: 5},
+        { timestamp: 1337111111111, value: 7},
+        { timestamp: 1338111111111, value: 2},
+        { timestamp: 1339111111111, value: 1}
+    ];
+
+    // populate chart series
+    for (var i = 0; i < data.length; i++) {
+        chart.series[0].addPoint( [data[i].timestamp, data[i].value], false, false, false );
+    }
+
+    chart.redraw();
+
+})
