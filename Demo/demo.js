@@ -1,4 +1,4 @@
-$(function(){
+window.addEvent('domready', function() {
 
     var chart = new Highcharts.Chart({
         chart: {
