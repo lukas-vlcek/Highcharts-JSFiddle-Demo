@@ -63,6 +63,7 @@ $(window).load(function(){
     $("#zoomIn").click(function(){
         console.log("zoom in", chart);
         chart.xAxis[0].setExtremes( manualMin, manualMax, false );
+        chart.showResetZoom();
         chart.redraw();
     });
 
