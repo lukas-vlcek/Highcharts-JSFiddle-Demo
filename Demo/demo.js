@@ -52,4 +52,8 @@ $(window).load(function(){
 
     chart.redraw();
 
+    $("#resetZoom").click(function(){
+        console.log(chart);
+    });
+
 })
