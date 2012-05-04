@@ -32,15 +32,18 @@ $(window).load(function(){
         }]
     });
 
+    var manualMin = 1333111111111;
+    var manualMax = 1337111111111;
+
     // create testing data
     var data = [
         { timestamp: 1331111111111, value: 2},
         { timestamp: 1332111111111, value: 1},
-        { timestamp: 1333111111111, value: 3},
+        { timestamp: manualMin, value: 3},
         { timestamp: 1334111111111, value: 2},
         { timestamp: 1335111111111, value: 1},
         { timestamp: 1336111111111, value: 5},
-        { timestamp: 1337111111111, value: 7},
+        { timestamp: manualMax, value: 7},
         { timestamp: 1338111111111, value: 2},
         { timestamp: 1339111111111, value: 1}
     ];
@@ -53,7 +56,14 @@ $(window).load(function(){
     chart.redraw();
 
     $("#resetZoom").click(function(){
-        console.log(chart);
+        console.log("zoom reset", chart);
+        chart.zoomOut();
+    });
+
+    $("#zoomIn").click(function(){
+        console.log("zoom in", chart);
+        chart.xAxis[0].setExtremes( manualMin, manualMax, false );
+        chart.redraw();
     });
 
 })
