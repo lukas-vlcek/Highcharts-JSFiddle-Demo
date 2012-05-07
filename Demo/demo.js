@@ -4,25 +4,25 @@ $(function () {
         chart: {
             renderTo: 'container',
             defaultSeriesType: 'line',
-            zoomType: 'x',
+            zoomType: 'x'
+        },
+
+        xAxis: {
             events: {
-                selection: function(event) {
-                    if (event.xAxis) {
+                setExtremes: function(event){
+                    console.log("setExtremes",event);
+                    if (event.max && event.min) {
                         // user selected interval on chart
-                        var fromMillis = Math.floor(event.xAxis[0].min);
-                        var toMillis = Math.ceil(event.xAxis[0].max);
+                        var fromMillis = Math.floor(event.min);
+                        var toMillis = Math.ceil(event.max);
 
                         console.log("min = " + fromMillis);
                         console.log("max = " + toMillis);
-
                     } else {
                         // chart zoom reset
                     }
                 }
-            }
-        },
-
-        xAxis: {
+            },
             type: 'datetime',
             minRange: 259200000 // three days (3 * 24 * 3600 * 1000)
         },
@@ -60,20 +60,19 @@ $(function () {
 
     $("#resetZoom").click(function(){
         console.log("zoom reset", chart);
-        chart.zoomOut();
+        chart.xAxis[0].setExtremes( null, null, false );
+        chart.redraw();
     });
 
     $("#zoomIn").click(function(){
         console.log("zoom in", chart);
         chart.xAxis[0].setExtremes( manualMin, manualMax, false );
-        chart.showResetZoom();
         chart.redraw();
     });
 
     $("#zoomInMore").click(function(){
         console.log("zoom in more", chart);
         chart.xAxis[0].setExtremes( manualMin2, manualMax2, false );
-        chart.showResetZoom();
         chart.redraw();
     });
 
