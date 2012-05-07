@@ -1,11 +1,9 @@
 /*
 ---
-name: Highcharts 2.2.x resetZoomButton demo 
+name: Highcharts 2.2.2 resetZoomButton demo
 description: Trying to learn how to show/hide resetZoomButton programmatically while still keep the automatic zoom/reset function.
 authors:
   - Lukas Vlcek
-resources:
-  - http://code.highcharts.com/164b8d95e7/highcharts.src.js
 ...
 */
 

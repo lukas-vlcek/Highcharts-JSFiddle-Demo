@@ -1,4 +1,4 @@
-$(window).load(function(){
+$(function () {
 
     var chart = new Highcharts.Chart({
         chart: {
@@ -77,4 +77,4 @@ $(window).load(function(){
         chart.redraw();
     });
 
-})
+});
