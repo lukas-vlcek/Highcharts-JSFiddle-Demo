@@ -4,25 +4,28 @@ $(function () {
         chart: {
             renderTo: 'container',
             defaultSeriesType: 'line',
-            zoomType: 'x'
-        },
-
-        xAxis: {
+            zoomType: 'x',
             events: {
-                setExtremes: function(event){
-                    console.log("setExtremes",event);
-                    if (event.max && event.min) {
-                        // user selected interval on chart
-                        var fromMillis = Math.floor(event.min);
-                        var toMillis = Math.ceil(event.max);
+                selection: function(event) {
+                    if (event.xAxis) {
+                        var fromMillis = Math.floor(event.xAxis[0].min);
+                        var toMillis = Math.ceil(event.xAxis[0].max);
 
                         console.log("min = " + fromMillis);
                         console.log("max = " + toMillis);
-                    } else {
-                        // chart zoom reset
+
+                        chart.xAxis[0].setExtremes( fromMillis, toMillis, false );
+                        chart.redraw();
+                        myZoomButton.show();
                     }
+
+                    // prevent default zoom reset button creation
+                    event.preventDefault();
                 }
-            },
+            }
+        },
+
+        xAxis: {
             type: 'datetime',
             minRange: 259200000 // three days (3 * 24 * 3600 * 1000)
         },
@@ -56,24 +59,34 @@ $(function () {
         chart.series[0].addPoint( [data[i].timestamp, data[i].value], false, false, false );
     }
 
+    // show chart
     chart.redraw();
 
-    $("#resetZoom").click(function(){
-        console.log("zoom reset", chart);
+    // custom zoom reset button (is used instead of the default one)
+    var myZoomButton = chart.renderer.button('Reset zoom',60,50,function(){
         chart.xAxis[0].setExtremes( null, null, false );
         chart.redraw();
+        myZoomButton.hide();
+    });
+
+    myZoomButton.hide().add();
+
+    $("#resetZoom").click(function(){
+        chart.xAxis[0].setExtremes( null, null, false );
+        chart.redraw();
+        myZoomButton.hide();
     });
 
     $("#zoomIn").click(function(){
-        console.log("zoom in", chart);
         chart.xAxis[0].setExtremes( manualMin, manualMax, false );
         chart.redraw();
+        myZoomButton.show();
     });
 
     $("#zoomInMore").click(function(){
-        console.log("zoom in more", chart);
         chart.xAxis[0].setExtremes( manualMin2, manualMax2, false );
         chart.redraw();
+        myZoomButton.show();
     });
 
 });
