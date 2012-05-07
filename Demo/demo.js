@@ -24,7 +24,7 @@ $(window).load(function(){
 
         xAxis: {
             type: 'datetime',
-            maxZoom: 259200000 // three days (3 * 24 * 3600 * 1000)
+            minRange: 259200000 // three days (3 * 24 * 3600 * 1000)
         },
 
         series: [{
