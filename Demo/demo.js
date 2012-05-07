@@ -6,6 +6,18 @@ $(function () {
             defaultSeriesType: 'line',
             zoomType: 'x',
             events: {
+                resize: function() {
+                    var w=this.chartWidth;
+                    //var h=this.chartHeight;
+                    myZoomButton.attr({
+                        //SVG
+                        transform: 'translate(' + (w-90) + ',' + 50 + ')'
+                    }).css({
+                            //VML
+                            left: (w-90) + 'px',
+                            top: 50 + 'px'
+                        });
+                },
                 selection: function(event) {
                     if (event.xAxis) {
                         var fromMillis = Math.floor(event.xAxis[0].min);
@@ -63,7 +75,7 @@ $(function () {
     chart.redraw();
 
     // custom zoom reset button (is used instead of the default one)
-    var myZoomButton = chart.renderer.button('Reset zoom',60,50,function(){
+    var myZoomButton = chart.renderer.button('Reset zoom',chart.chartWidth-90,50,function(){
         chart.xAxis[0].setExtremes( null, null, false );
         chart.redraw();
         myZoomButton.hide();
